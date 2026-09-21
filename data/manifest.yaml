@@ -1,0 +1,180 @@
+schema_version: "1.0"
+project: "bama-ai"
+verified_at: "2026-09-21"
+
+# Machine-readable registry of external resources audited during Phase 1.
+# Do not add checksums until the exact artifact has been downloaded and hashed.
+
+resources:
+  - id: kunkado
+    kind: dataset
+    task: asr
+    language: bam
+    source_url: "https://huggingface.co/datasets/RobotsMali/kunkado"
+    version: null
+    revision: null
+    license: "CC BY-SA 4.0"
+    license_status: verified
+    size: "161.15h"
+    segments: 118925
+    provenance:
+      - "Radio Benkouma"
+      - "Mousso TV"
+      - "ORTM"
+      - "Radio Sahel FM"
+    role: reuse
+    status: confirmed
+    commercial_use: conditional
+    notes: "Bambara-majority speech with French code-switching. Current card reports about 39.3h reviewed and known segmentation/spelling/code-switch issues."
+
+  - id: jeli-asr
+    kind: dataset
+    task: asr
+    language: bam
+    source_url: "https://huggingface.co/datasets/RobotsMali/jeli-asr"
+    version: "1.0.1"
+    revision: null
+    license: "CC BY 4.0"
+    license_status: verified
+    size: "32.48h"
+    segments: 33600
+    role: reuse
+    status: confirmed
+    commercial_use: conditional
+    notes: "Bambara and French. Current dataset is evolving; pin the exact revision before experiments."
+
+  - id: soloba-ctc-0.6b-v3
+    kind: model
+    task: asr
+    language: bam
+    source_url: "https://huggingface.co/RobotsMali/soloba-ctc-0.6b-v3"
+    version: "v3"
+    revision: null
+    license: "CC BY 4.0"
+    license_status: verified
+    size: null
+    segments: null
+    provenance:
+      - "Fine-tuned on Kunkado"
+      - "Base model: NVIDIA Parakeet"
+    role: benchmark
+    status: confirmed
+    commercial_use: conditional
+    notes: "Model card reports Kunkado WER 38.87/CER 21.65 and Nyana Eval WER 38.69/CER 18.92. Model licence and training-data licences must be tracked separately."
+
+  - id: bayelemabaga
+    kind: dataset
+    task: parallel_text
+    language: bam
+    source_url: "https://huggingface.co/datasets/RobotsMaliAI/bayelemabaga"
+    version: "1.0.1"
+    revision: null
+    license: "CC BY-SA 4.0"
+    license_status: verified
+    size: null
+    segments: 46976
+    provenance:
+      - "Corpus Bambara de Reference"
+      - "264 text sources"
+    role: reuse
+    status: confirmed
+    commercial_use: conditional
+    notes: "Aligned Bambara-French lines. Current card notes known last-minute misalignment issues and the use of symbol ʃ. Underlying source provenance remains relevant."
+
+  - id: cbr
+    kind: corpus
+    task: text
+    language: bam
+    source_url: "https://www.sciencedirect.com/science/article/pii/S187704281304144X"
+    version: null
+    revision: null
+    license: null
+    license_status: needs_verification
+    size: ">1M words"
+    segments: null
+    provenance:
+      - "Corpus Bambara de Reference"
+    role: inspect
+    status: strategic
+    commercial_use: unknown
+    notes: "The publication describes the corpus as freely accessible, but this is not sufficient to establish redistribution or commercial training rights for the corpus itself. Do not redistribute or train commercially until scope is verified."
+
+  - id: maliba-ai-bambara-tts
+    kind: repository
+    task: tts
+    language: bam
+    source_url: "https://github.com/MALIBA-AI/bambara-tts"
+    version: null
+    revision: null
+    license: "CC BY-NC-SA 4.0"
+    license_status: verified
+    size: null
+    segments: null
+    provenance:
+      - "MALIBA-AI"
+    role: benchmark
+    status: research_only
+    commercial_use: false
+    notes: "Open-source Bambara TTS SDK with ten speakers. Non-commercial restriction applies; attribution and ShareAlike requirements also apply. Treat as a research baseline unless separate permission is obtained."
+
+  - id: belebele-bam-latn
+    kind: benchmark
+    task: language_understanding
+    language: bam
+    source_url: "https://github.com/facebookresearch/belebele"
+    version: null
+    revision: null
+    license: "CC BY-SA 4.0"
+    license_status: verified
+    size: null
+    segments: null
+    provenance:
+      - "Belebele benchmark"
+    role: benchmark
+    status: confirmed
+    commercial_use: conditional
+    notes: "Bambara variant is bam_Latn. Keep benchmark/test material isolated from training data. The assembled training set has different licensing and must not be conflated with the benchmark licence."
+
+  - id: bambara-text-normalizer
+    kind: software
+    task: text_normalization
+    language: bam
+    source_url: null
+    version: null
+    revision: null
+    license: "MIT"
+    license_status: needs_reverification
+    size: null
+    segments: null
+    provenance: []
+    role: inspect
+    status: candidate
+    commercial_use: unknown
+    notes: "Licence was recorded in the Phase 1 inventory but should be rechecked against the current upstream repository before adoption."
+
+  - id: maliba-ai-framework
+    kind: software
+    task: ai_framework
+    language: bam
+    source_url: null
+    version: null
+    revision: null
+    license: null
+    license_status: needs_verification
+    size: null
+    segments: null
+    provenance:
+      - "MALIBA-AI"
+    role: inspect
+    status: candidate
+    commercial_use: unknown
+    notes: "Keep outside the training corpus until the current repository licence and dependency chain are audited."
+
+policy:
+  benchmark_is_not_training: true
+  public_access_is_not_unrestricted_reuse: true
+  dataset_and_model_licenses_are_separate: true
+  pin_exact_revisions_for_experiments: true
+  checksums_required_for_local_artifacts: true
+  provenance_required: true
+  exclude_noncommercial_resources_from_commercial_release: true
